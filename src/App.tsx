@@ -1,3 +1,4 @@
+import { useState } from 'react';
 // Layout
 import { Header } from "@/components/layout/Header"
 import { NotaInput } from "./components/layout/NotaInput"
@@ -9,17 +10,28 @@ import { Button } from "@/components/ui/button"
 
 
 export function App() {
+  // Estado que guarda la lista de componentes NotaInput
+  const [notas, setNotas] = useState<number[]>([0]);
+
+  // Función para añadir una nueva nota
+  const agregarNota = () => {
+    setNotas((prevNotas) => [...prevNotas, prevNotas.length]);
+  };
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Header/>
+      <Header />
       <main className="flex flex-col items-center flex-grow">
-        <NotaInput />
+        {/* Renderizamos los componentes NotaInput basados en el estado */}
+        {notas.map((_, index) => (
+          <NotaInput key={index} numeroNota={index + 1} />
+        ))}
         <NotaTotal />
-        <Button className="w-80 mt-10">+ Añadir nota</Button>
+        <Button className="w-80 mt-10" onClick={agregarNota}>
+          + Añadir nota
+        </Button>
       </main>
       <Footer />
     </div>
-  )
+  );
 }
-
