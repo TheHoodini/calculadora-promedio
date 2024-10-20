@@ -1,12 +1,12 @@
 import { useState } from 'react';
 // Layout
-import { Header } from "@/components/layout/Header"
+import { Header } from "./components/layout/Header"
 import { NotaInput } from "./components/layout/NotaInput"
 import { Footer } from "./components/layout/Footer"
 import { NotaTotal } from "./components/layout/NotaTotal"
 
 // UI
-import { Button } from "@/components/ui/button"
+import { Button } from "./components/ui/button"
 
 
 export function App() {
@@ -27,7 +27,7 @@ export function App() {
           <NotaInput key={index} numeroNota={index + 1} />
         ))}
         <NotaTotal />
-        <Button className="w-full mt-10" onClick={agregarNota}>
+        <Button className="w-full mt-10 bg-[#2790db] hover:bg-[#51b7ff]" onClick={agregarNota}>
           + Añadir nota
         </Button>
       </main>

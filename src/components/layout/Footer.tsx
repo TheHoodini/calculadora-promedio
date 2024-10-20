@@ -3,7 +3,7 @@ import repoLogo from "@/assets/repo.svg"
 
 export function Footer() {
     return (
-        <footer className="bg-slate-900 text-white font-bold flex flex-col items-center gap-2 mt-10 w-full">
+        <footer className="bg-slate-800 text-white font-bold flex flex-col items-center gap-2 mt-10 w-full">
             <h1 className="mt-3">Made by Hoodini</h1>
             <div className="flex items-center gap-4">
                 <a href="https://github.com/TheHoodini" target="_blank" rel="noopener noreferrer">
