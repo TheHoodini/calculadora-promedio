@@ -19,15 +19,15 @@ export function App() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen items-center">
       <Header />
-      <main className="flex flex-col items-center flex-grow">
+      <main className="flex flex-col items-center flex-grow w-80 xl:w-[27%]">
         {/* Renderizamos los componentes NotaInput basados en el estado */}
         {notas.map((_, index) => (
           <NotaInput key={index} numeroNota={index + 1} />
         ))}
         <NotaTotal />
-        <Button className="w-80 mt-10" onClick={agregarNota}>
+        <Button className="w-full mt-10" onClick={agregarNota}>
           + Añadir nota
         </Button>
       </main>
