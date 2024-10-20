@@ -4,38 +4,41 @@ import { Header } from "./components/layout/Header"
 import { NotaInput } from "./components/layout/NotaInput"
 import { Footer } from "./components/layout/Footer"
 import { NotaTotal } from "./components/layout/NotaTotal"
-
-// UI
-import { Button } from "./components/ui/button"
+import { BotonesNotas } from './components/layout/BotonesNota';
 
 interface Nota {
-  peso: number;
-  nota: number;
+  peso: number | string;
+  nota: number | string;
   activa: boolean;
 }
 
 export function App() {
-  const [notas, setNotas] = useState<Nota[]>([{ peso: 0, nota: 0, activa: false }]);
+  const [notas, setNotas] = useState<Nota[]>([{ peso: '', nota: '', activa: false }]);
 
   const agregarNota = () => {
-    setNotas((prevNotas) => [...prevNotas, { peso: 0, nota: 0, activa: false }]);
+    setNotas((prevNotas) => [...prevNotas, { peso: '', nota: '', activa: false }]);
+  };
+
+  const removerUltimaNota = () => {
+    setNotas((prevNotas) => prevNotas.slice(0, -1));
   };
 
   const actualizarNota = (index: number, nuevaNota: Partial<Nota>) => {
     setNotas((prevNotas) =>
-      prevNotas.map((nota, i) =>
-        i === index ? { ...nota, ...nuevaNota } : nota
-      )
+      prevNotas.map((nota, i) => (i === index ? { ...nota, ...nuevaNota } : nota))
     );
   };
 
   const calcularNotaTotal = () => {
-    const notasActivas = notas.filter((nota) => nota.activa);
-    const pesoTotal = notasActivas.reduce((total, nota) => total + nota.peso, 0);
+    const notasActivas = notas.filter((nota) => nota.activa && nota.peso !== '' && nota.nota !== '');
+    const pesoTotal = notasActivas.reduce((total, nota) => total + parseFloat(nota.peso as string), 0);
 
-    if (pesoTotal === 0) return "0";
+    if (pesoTotal === 0) return '0.00';
 
-    const sumaNotas = notasActivas.reduce((total, nota) => total + (nota.nota * (nota.peso / 100)), 0);
+    const sumaNotas = notasActivas.reduce(
+      (total, nota) => total + (parseFloat(nota.nota as string) * (parseFloat(nota.peso as string) / 100)),
+      0
+    );
 
     return sumaNotas.toFixed(1);
   };
@@ -55,9 +58,11 @@ export function App() {
           />
         ))}
         <NotaTotal notaTotal={calcularNotaTotal()} />
-        <Button className="w-full mt-10 bg-[#2790db] hover:bg-[#51b7ff]" onClick={agregarNota}>
-          + Añadir nota
-        </Button>
+        <BotonesNotas
+          agregarNota={agregarNota}
+          removerUltimaNota={removerUltimaNota}
+          hayMasDeUnaNota={notas.length > 1}
+        />
       </main>
       <Footer />
     </div>
