@@ -26,7 +26,7 @@ export function NotaInput({ numeroNota, peso, nota, activa, actualizarNota }: No
       <div className="flex gap-5">
         <p className="flex items-center">Nota {numeroNota}</p>
         <Input
-          className="w-20"
+          className="w-20 text-base"
           placeholder="Peso"
           value={peso}
           label="%"
@@ -35,7 +35,7 @@ export function NotaInput({ numeroNota, peso, nota, activa, actualizarNota }: No
       </div>
       <div className="flex items-center gap-5">
         <Input
-          className="w-24"
+          className="w-24 text-base"
           placeholder="Nota"
           step={0.01}
           value={nota}

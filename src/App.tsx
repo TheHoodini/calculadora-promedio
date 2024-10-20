@@ -4,7 +4,7 @@ import { Header } from "./components/layout/Header"
 import { NotaInput } from "./components/layout/NotaInput"
 import { Footer } from "./components/layout/Footer"
 import { NotaTotal } from "./components/layout/NotaTotal"
-import { BotonesNotas } from './components/layout/BotonesNota';
+import { BotonesNota } from './components/layout/BotonesNota';
 
 interface Nota {
   peso: number | string;
@@ -58,7 +58,7 @@ export function App() {
           />
         ))}
         <NotaTotal notaTotal={calcularNotaTotal()} />
-        <BotonesNotas
+        <BotonesNota
           agregarNota={agregarNota}
           removerUltimaNota={removerUltimaNota}
           hayMasDeUnaNota={notas.length > 1}
